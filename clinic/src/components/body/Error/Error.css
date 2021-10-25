@@ -1,0 +1,27 @@
+.error {
+  width: 100%;
+  height: 100%;
+  background-color: var(--clr-blue-bg);
+  text-align: center;
+}
+.error h1,
+.error h3 {
+  color: var(--clr-pri-darkest);
+}
+.error h1 {
+  padding-top: 100px;
+  font-size: 130px;
+}
+.error_btn {
+  margin: 30px;
+  margin-bottom: 150px;
+}
+@media screen and (min-width: 700px) {
+  .error h1 {
+    padding-top: 200px;
+    font-size: 170px;
+  }
+  .error_btn {
+    margin-bottom: 200px;
+  }
+}
