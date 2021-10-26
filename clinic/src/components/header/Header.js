@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { FaBars } from 'react-icons/fa'
-import logo from '../../../assets/logo.svg'
+import logo from '../../assets/logo.svg'
 // import Navbar from '../Navbar/Navbar'
-
 import './Header.css'
+import { AuthContext } from '../../contexts/AuthContext'
 
 const Header = () => {
     const [showLinks, setShowLinks] = useState(false)
+    const {
+        authState: {
+            user: { name }
+        },
+        logoutUser
+    } = useContext(AuthContext)
 
+    const logOut = () => logoutUser()
     return (
         // <div className="header">
         //     <div className="header-logo">
@@ -47,7 +54,11 @@ const Header = () => {
                         <li>
                             <a href='/equipments'>equipments</a>
                         </li>
+                        <li>
+                            Hello {name}
+                        </li>
                     </ul>
+                    <button onClick={logOut}>Logout</button>
                 </div>
             </div>
         </nav>

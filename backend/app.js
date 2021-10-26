@@ -15,13 +15,14 @@ app.use(
 
 // import routes
 const equipment = require('./routes/equipment')
+const authRouter = require('./routes/auth')
 
 // port
 const port = process.env.PORT || 5000
 
 // routes
 app.use('/api/v1/equipment', equipment)
-
+app.use('/auth', authRouter)
 // start
 const start = async () => {
     try {
