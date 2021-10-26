@@ -38,3 +38,9 @@
   margin-left: 60px;
   float: left;
 }
+.description {
+  padding: 20px;
+  position: relative;
+  width: fit-content;
+  align-items: left;
+}

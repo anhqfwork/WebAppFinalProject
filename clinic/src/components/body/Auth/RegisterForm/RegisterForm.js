@@ -29,62 +29,74 @@ const RegisterForm = () => {
         }
     }
     return (
-        <>
-            <Form className='my-4' onSubmit={register}>
-                <Form.Group>
-                    <Form.Control
-                        type='email'
-                        placeholder='Email'
-                        name='email'
-                        required
-                        value={email}
-                        onChange={onChangeRegisterForm}
-                    />
-                </Form.Group>
+        <div className="login_container">
+            <div className="register_form">
+                <h3>Register</h3>
+                <Form className='my-4' onSubmit={register}>
+                    <Form.Group>
+                        <h4>Email address</h4>
+                        <Form.Control
+                            type='email'
+                            placeholder='Enter email address'
+                            name='email'
+                            required
+                            value={email}
+                            onChange={onChangeRegisterForm}
+                            className="log_input"
+                        />
+                    </Form.Group>
 
-                <Form.Group>
-                    <Form.Control
-                        type='password'
-                        placeholder='Password'
-                        name='password'
-                        required
-                        value={password}
-                        onChange={onChangeRegisterForm}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Control
-                        type='text'
-                        placeholder='firstName'
-                        name='firstName'
-                        required
-                        value={firstName}
-                        onChange={onChangeRegisterForm}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Control
-                        type='text'
-                        placeholder='lastName'
-                        name='lastName'
-                        required
-                        value={lastName}
-                        onChange={onChangeRegisterForm}
-                    />
-                </Form.Group>
-                <Button variant='success' type='submit'>
-                    Register
-                </Button>
-            </Form>
-            <p>
-                Already have an account?
-                <Link to='/login'>
-                    <Button variant='info' size='sm' className='ml-2'>
-                        Login
+                    <Form.Group>
+                        <h4>Password</h4>
+                        <Form.Control
+                            type='password'
+                            placeholder='Create password'
+                            name='password'
+                            required
+                            value={password}
+                            onChange={onChangeRegisterForm}
+                            className="log_input"
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <h4>First Name</h4>
+                        <Form.Control
+                            type='text'
+                            placeholder='Enter your first name'
+                            name='firstName'
+                            required
+                            value={firstName}
+                            onChange={onChangeRegisterForm}
+                            className="log_input"
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <h4>Last Name</h4>
+                        <Form.Control
+                            type='text'
+                            placeholder='Enter your last name'
+                            name='lastName'
+                            required
+                            value={lastName}
+                            onChange={onChangeRegisterForm}
+                            className="log_input"
+                        />
+                    </Form.Group>
+                    <Button variant='success' type='submit' className="btn_prim log_btn">
+                        Register
                     </Button>
-                </Link>
-            </p>
-        </>
+                </Form>
+                <p className="block">
+                    Already have an account? <span>
+                    <Link to='/login'>
+                        <Button variant='info' size='sm' className='login'>
+                            Login
+                        </Button>
+                    </Link>
+                    </span>
+                </p>
+            </div>
+        </div>
     )
 }
 

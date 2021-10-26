@@ -36,7 +36,6 @@ const Equipment = () => {
             </div>
             <div className='equip_container'>
                 <img className='item-image' src={equipment.img} alt='' />
-                <div>
                     <div className='equip_info'>
                         <h2>{equipment.name}</h2>
                         <p>
@@ -47,9 +46,6 @@ const Equipment = () => {
                         </p>
                         <p>
                             <span className='equip_data'>Country :</span> {equipment.country}
-                        </p>
-                        <p>
-                            <span className='equip_data'>Description :</span> {equipment.description}
                         </p>
                         <p>
                             <span className='equip_data'>Model :</span> {equipment.model}
@@ -63,12 +59,16 @@ const Equipment = () => {
                         <p>
                             <span className='equip_data'>Brand :</span> {equipment.brand}
                         </p>
-                    </div>
-                    <Link to={`/equipments/${equipment._id}/edit`} className="btn_prim edit_btn">Edit</Link>            
-                    <Link to='/equipments' onClick={() => deleteEquipment(equipment._id)} 
-                        className="btn_del del_btn">Delete</Link>
+                        <Link to={`/equipments/${equipment._id}/edit`} className="btn_prim edit_btn">Edit</Link>            
+                        <Link to='/equipments' onClick={() => deleteEquipment(equipment._id)} 
+                            className="btn_del del_btn">Delete</Link>                           
+                    </div>                    
                 </div>
-            </div>
+                <div className="center description">
+                    <p>
+                        <span className='equip_data'>Description :</span> {equipment.description}
+                    </p>
+                </div>
         </div>
     )
 }
