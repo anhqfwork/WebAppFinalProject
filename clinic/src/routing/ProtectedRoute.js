@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
 import Header from '../components/header/Header'
 import Footer from '../components/footer/Footer'
+import Home from '../components/body/Home/Home'
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
     const {
@@ -21,17 +22,8 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
                                 <Footer />
                             </>
                         )
-                    } else {
-						return <Redirect to='/login' />
                     }
                 }
-                // isAuthenticated ? (
-                // 	<>
-                // 		<Component {...rest} {...props} />
-                // 	</>
-                // ) : (
-                // 	<Redirect to='/login' />
-                // )
             }
         />
     )

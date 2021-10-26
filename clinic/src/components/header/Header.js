@@ -40,6 +40,7 @@ const Header = () => {
                         <FaBars />
                     </button>
                 </div>
+                <div> Hello {name} </div>
                 <div
                     className={`${
                         showLinks
@@ -55,10 +56,9 @@ const Header = () => {
                             <a href='/equipments'>equipments</a>
                         </li>
                         <li>
-                            Hello {name}
+                            <a href='/login' onClick={logOut}>Logout</a>
                         </li>
                     </ul>
-                    <button onClick={logOut}>Logout</button>
                 </div>
             </div>
         </nav>

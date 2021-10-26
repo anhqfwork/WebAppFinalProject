@@ -7,20 +7,25 @@ import { Link } from 'react-router-dom'
 const EditEquipment = () => {
     const [img, setImg] = useState()
     const [name, setName] = useState()
-    const [equipmentNo, setEquipmentNo] = useState()
     const [quantity, setQuantity] = useState()
     const [category, setCategory] = useState()
     const [description, setDescription] = useState()
     const [country, setCountry] = useState()
+    const [model, setModel] = useState()
+    const [subcategory, setSubcategory] = useState()
+    const [condition, setCondition] = useState()
+    const [brand, setBrand] = useState()
 
     const { id } = useParams()
 
     const getEquipment = async () => {
-        const res = await axios.get(`/api/v1/equipment/${id}`).catch((err) => console.log(err))
+        const res = await axios
+            .get(`/api/v1/equipment/${id}`)
+            .catch((err) => console.log(err))
         if (res && res.data) {
             setImg(res.data.equipment.img)
             setName(res.data.equipment.name)
-            setEquipmentNo(res.data.equipment.equipmentNo)
+            setModel(res.data.equipment.model)
             setQuantity(res.data.equipment.quantity)
             setCategory(res.data.equipment.category)
             setDescription(res.data.equipment.description)
@@ -40,10 +45,6 @@ const EditEquipment = () => {
         setName(e.target.value)
     }
 
-    const changeEquipmentNo = (e) => {
-        setEquipmentNo(e.target.value)
-    }
-
     const changeQuantity = (e) => {
         setQuantity(e.target.value)
     }
@@ -60,12 +61,39 @@ const EditEquipment = () => {
         setCountry(e.target.value)
     }
 
+    const changeModel = (e) => {
+        setModel(e.target.value)
+    }
+
+    const changeSubCategory = (e) => {
+        setSubcategory(e.target.value)
+    }
+
+    const changeCondition = (e) => {
+        setCondition(e.target.value)
+    }
+
+    const changeBrand = (e) => {
+        setBrand(e.target.value)
+    }
+
     const handleSubmit = async () => {
         const newEquipment = {
-            img, name, equipmentNo, quantity, category, description, country
+            img,
+            name,
+            quantity,
+            category,
+            description,
+            country,
+            model,
+            subcategory,
+            condition,
+            brand,
         }
 
-        await axios.patch(`/api/v1/equipment/${id}`, newEquipment).catch((err) => console.log(err))
+        await axios
+            .patch(`/api/v1/equipment/${id}`, newEquipment)
+            .catch((err) => console.log(err))
 
         console.log(newEquipment)
     }
@@ -74,9 +102,7 @@ const EditEquipment = () => {
         <div>
             <div>
                 <button>
-                    <Link to={`/equipments/${id}`}>
-                        Back
-                    </Link>
+                    <Link to={`/equipments/${id}`}>Back</Link>
                 </button>
             </div>
             <div className='add-img'>
@@ -95,27 +121,75 @@ const EditEquipment = () => {
                 </div>
                 <div>
                     <label>Name: </label>
-                    <input type='text' value={name || ''} onChange={changeName} />
-                </div>
-                <div>
-                    <label>EquipmentNo: </label>
-                    <input type='text' value={equipmentNo || ''} onChange={changeEquipmentNo} />
+                    <input
+                        type='text'
+                        value={name || ''}
+                        onChange={changeName}
+                    />
                 </div>
                 <div>
                     <label>Quantity: </label>
-                    <input type='text' value={quantity || ''} onChange={changeQuantity} />
+                    <input
+                        type='text'
+                        value={quantity || ''}
+                        onChange={changeQuantity}
+                    />
                 </div>
                 <div>
                     <label>Category: </label>
-                    <input type='text' value={category || ''} onChange={changeCategory} />
+                    <input
+                        type='text'
+                        value={category || ''}
+                        onChange={changeCategory}
+                    />
                 </div>
                 <div>
                     <label>Description: </label>
-                    <input type='text' value={description || ''} onChange={changeDescription} />
+                    <input
+                        type='text'
+                        value={description || ''}
+                        onChange={changeDescription}
+                    />
                 </div>
                 <div>
                     <label>Country: </label>
-                    <input type='text' value={country || ''} onChange={changeCountry} />
+                    <input
+                        type='text'
+                        value={country || ''}
+                        onChange={changeCountry}
+                    />
+                </div>
+                <div>
+                    <label>Model: </label>
+                    <input
+                        type='text'
+                        value={model || ''}
+                        onChange={changeModel}
+                    />
+                </div>
+                <div>
+                    <label>SubCategory: </label>
+                    <input
+                        type='text'
+                        value={subcategory || ''}
+                        onChange={changeSubCategory}
+                    />
+                </div>
+                <div>
+                    <label>Condition: </label>
+                    <input
+                        type='text'
+                        value={condition || ''}
+                        onChange={changeCondition}
+                    />
+                </div>
+                <div>
+                    <label>Brand: </label>
+                    <input
+                        type='text'
+                        value={brand || ''}
+                        onChange={changeBrand}
+                    />
                 </div>
             </form>
             <button type='submit' onClick={handleSubmit} className='btn'>

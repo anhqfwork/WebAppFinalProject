@@ -39,11 +39,15 @@ const Equipment = () => {
             <div>
                 <img className='item-image' src={equipment.img} alt='' />
                 <h1>Name: {equipment.name}</h1>
-                <p>EquipmentNo: {equipment.equipmentNo}</p>
                 <p>Quantity: {equipment.quantity}</p>
                 <p>Category: {equipment.category}</p>
                 <p>Country: {equipment.country}</p>
                 <p>Description: {equipment.description}</p>
+                <p>Model: {equipment.model}</p>
+                <p>Sub Category: {equipment.subcategory}</p>
+                <p>Condition: {equipment.condition}</p>
+                <p>Brand: {equipment.brand}</p>
+
                 <button>
                     <Link to={`/equipments/${equipment._id}/edit`}>Edit</Link>
                 </button>

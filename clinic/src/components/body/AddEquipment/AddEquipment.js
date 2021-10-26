@@ -6,11 +6,14 @@ import { Link } from 'react-router-dom'
 const AddEquipment = () => {
     const [img, setImg] = useState()
     const [name, setName] = useState()
-    const [equipmentNo, setEquipmentNo] = useState()
     const [quantity, setQuantity] = useState()
     const [category, setCategory] = useState()
     const [description, setDescription] = useState()
     const [country, setCountry] = useState()
+    const [model, setModel] = useState()
+    const [subcategory, setSubcategory] = useState()
+    const [condition, setCondition] = useState()
+    const [brand, setBrand] = useState()
 
     const changeImg = (e) => {
         setImg(e.target.value)
@@ -18,10 +21,6 @@ const AddEquipment = () => {
 
     const changeName = (e) => {
         setName(e.target.value)
-    }
-
-    const changeEquipmentNo = (e) => {
-        setEquipmentNo(e.target.value)
     }
 
     const changeQuantity = (e) => {
@@ -40,12 +39,39 @@ const AddEquipment = () => {
         setCountry(e.target.value)
     }
 
+    const changeModel = (e) => {
+        setModel(e.target.value)
+    }
+
+    const changeSubCategory = (e) => {
+        setSubcategory(e.target.value)
+    }
+
+    const changeCondition = (e) => {
+        setCondition(e.target.value)
+    }
+
+    const changeBrand = (e) => {
+        setBrand(e.target.value)
+    }
+
     const handleSubmit = async () => {
         const newEquipment = {
-            img, name, equipmentNo, quantity, category, description, country
+            img,
+            name,
+            quantity,
+            category,
+            description,
+            country,
+            model,
+            subcategory,
+            condition,
+            brand,
         }
 
-        await axios.post(`/api/v1/equipment/`, newEquipment).catch((err) => console.log(err))
+        await axios
+            .post(`/api/v1/equipment/`, newEquipment)
+            .catch((err) => console.log(err))
 
         console.log(newEquipment)
     }
@@ -80,14 +106,6 @@ const AddEquipment = () => {
                     />
                 </div>
                 <div>
-                    <label>EquipmentNo: </label>
-                    <input
-                        type='text'
-                        value={equipmentNo || ''}
-                        onChange={changeEquipmentNo}
-                    />
-                </div>
-                <div>
                     <label>Quantity: </label>
                     <input
                         type='text'
@@ -117,6 +135,38 @@ const AddEquipment = () => {
                         type='text'
                         value={country || ''}
                         onChange={changeCountry}
+                    />
+                </div>
+                <div>
+                    <label>Model: </label>
+                    <input
+                        type='text'
+                        value={model || ''}
+                        onChange={changeModel}
+                    />
+                </div>
+                <div>
+                    <label>SubCategory: </label>
+                    <input
+                        type='text'
+                        value={subcategory || ''}
+                        onChange={changeSubCategory}
+                    />
+                </div>
+                <div>
+                    <label>Condition: </label>
+                    <input
+                        type='text'
+                        value={condition || ''}
+                        onChange={changeCondition}
+                    />
+                </div>
+                <div>
+                    <label>Brand: </label>
+                    <input
+                        type='text'
+                        value={brand || ''}
+                        onChange={changeBrand}
                     />
                 </div>
             </form>
