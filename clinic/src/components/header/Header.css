@@ -13,9 +13,10 @@ Variables
   --clr-blue-bg: #d5ebf7;
   --clr-grey-bg: #f6f8fb;
   --clr-grey: #cacccf;
+  --clr-grey-dark: #919191;
   --clr-white: #fff;
   --clr-red-dark: hsl(360, 67%, 44%);
-  --clr-red-light: hsl(360, 71%, 66%);
+  --clr-red-light: rgb(238, 143, 143);
   --clr-black: #222;
 
   --transition: all 0.3s linear;
@@ -92,7 +93,9 @@ p {
     line-height: 1;
   }
 }
-
+nav {
+  box-shadow: var(--light-shadow);
+}
 .logo {
   width: 150px;
   height: auto;
@@ -123,7 +126,7 @@ p {
   color: var(--clr-primary);
   background: transparent;
   border-color: transparent;
-  transition: all 0.3s linear;
+  transition: var(--transition);
   cursor: pointer;
 }
 .nav-toggle:hover {
@@ -133,10 +136,17 @@ p {
 .links-container {
   height: 0;
   overflow: hidden;
-  transition: all 0.3s linear;
+  transition: var(--transition);
 }
 .show-container {
   height: 6rem;
+}
+.user_container {
+  display: none;
+}
+.user_container a {
+  font-size: 20px;
+  color: var(--clr-pri-darkest);
 }
 @media screen and (min-width: 800px) {
   .nav-center {
@@ -169,6 +179,12 @@ p {
   }
   .logo {
     width: 200px;
+  }
+  .user_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
   }
 }
 /*
@@ -209,4 +225,41 @@ Buttons
 .btn_sec:focus {
   background: var(--clr-pri-dark);
   color: var(--clr-white);
+}
+.btn_del {
+  background: var(--clr-red-dark);
+  color: var(--clr-white);
+  padding: 0.3rem 1rem;
+  letter-spacing: var(--spacing);
+  display: inline-block;
+  transition: var(--transition);
+  font-size: 0.875rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  box-shadow: var(--light-shadow);
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+}
+.btn_del:hover {
+  color: var(--clr-red-dark);
+  border: 2px solid var(--clr-red-dark);
+  background: var(--clr-red-light);
+}
+.btn_black {
+  background: var(--clr-black);
+  color: var(--clr-white);
+  padding: 0.3rem 1rem;
+  letter-spacing: var(--spacing);
+  display: inline-block;
+  transition: var(--transition);
+  font-size: 0.875rem;
+  border: 2px solid var(--clr-black);
+  cursor: pointer;
+  box-shadow: var(--light-shadow);
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+}
+.btn_black:hover {
+  color: var(--clr-black);
+  background: transparent;
 }

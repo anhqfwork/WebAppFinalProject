@@ -31,29 +31,43 @@ const Equipment = () => {
 
     return (
         <div>
-            <div>
-                <button>
-                    <Link to='/equipments'>Back to Equipments</Link>
-                </button>
+            <div className="block">
+                <Link to='/equipments' className="btn_black">Back to Equipments</Link>
             </div>
-            <div>
+            <div className='equip_container'>
                 <img className='item-image' src={equipment.img} alt='' />
-                <h1>Name: {equipment.name}</h1>
-                <p>Quantity: {equipment.quantity}</p>
-                <p>Category: {equipment.category}</p>
-                <p>Country: {equipment.country}</p>
-                <p>Description: {equipment.description}</p>
-                <p>Model: {equipment.model}</p>
-                <p>Sub Category: {equipment.subcategory}</p>
-                <p>Condition: {equipment.condition}</p>
-                <p>Brand: {equipment.brand}</p>
-
-                <button>
-                    <Link to={`/equipments/${equipment._id}/edit`}>Edit</Link>
-                </button>
-                <button onClick={() => deleteEquipment(equipment._id)}>
-                    <Link to='/equipments'>Delete</Link>
-                </button>
+                <div>
+                    <div className='equip_info'>
+                        <h2>{equipment.name}</h2>
+                        <p>
+                            <span className='equip_data'>Quantity :</span> {equipment.quantity}
+                        </p>
+                        <p>
+                            <span className='equip_data'>Category :</span> {equipment.category}
+                        </p>
+                        <p>
+                            <span className='equip_data'>Country :</span> {equipment.country}
+                        </p>
+                        <p>
+                            <span className='equip_data'>Description :</span> {equipment.description}
+                        </p>
+                        <p>
+                            <span className='equip_data'>Model :</span> {equipment.model}
+                        </p>
+                        <p>
+                            <span className='equip_data'>Sub Category :</span> {equipment.subcategory}
+                        </p>
+                        <p>
+                            <span className='equip_data'>Condition :</span> {equipment.condition}
+                        </p>
+                        <p>
+                            <span className='equip_data'>Brand :</span> {equipment.brand}
+                        </p>
+                    </div>
+                    <Link to={`/equipments/${equipment._id}/edit`} className="btn_prim edit_btn">Edit</Link>            
+                    <Link to='/equipments' onClick={() => deleteEquipment(equipment._id)} 
+                        className="btn_del del_btn">Delete</Link>
+                </div>
             </div>
         </div>
     )

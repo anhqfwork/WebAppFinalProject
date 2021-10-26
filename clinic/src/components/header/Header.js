@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { FaBars } from 'react-icons/fa'
+import { FaBars, FaUserMinus } from 'react-icons/fa'
 import logo from '../../assets/logo.svg'
 // import Navbar from '../Navbar/Navbar'
 import './Header.css'
@@ -40,7 +40,7 @@ const Header = () => {
                         <FaBars />
                     </button>
                 </div>
-                <div> Hello {name} </div>
+                
                 <div
                     className={`${
                         showLinks
@@ -55,10 +55,11 @@ const Header = () => {
                         <li>
                             <a href='/equipments'>equipments</a>
                         </li>
-                        <li>
-                            <a href='/login' onClick={logOut}>Logout</a>
-                        </li>
                     </ul>
+                </div>
+                <div className="user_container"> 
+                    <a>Hello, {name}</a>
+                    <a href='/login' onClick={logOut}>Logout <FaUserMinus /></a>
                 </div>
             </div>
         </nav>

@@ -47,12 +47,14 @@ const Category = () => {
 
     const Equipment = (equipment) => {
         return (
-            <li>
+            <li className="product_item">
                 <a href={`/equipments/${equipment._id}`}>
                     <img className='item-image' src={equipment.img} alt='' />
                 </a>
-                <p>{equipment.name}</p>
-                <p>Country: {equipment.country}</p>
+                <div className="product_info">
+                    <h5>{equipment.name}</h5>
+                    <p>Country: <span>{equipment.country}</span></p>
+                </div>                
             </li>
         )
     }
@@ -151,12 +153,6 @@ const Category = () => {
 
     return (
         <div>
-            <div className='page_title'>
-                <h4>Category</h4>
-                <a href='/equipments/add' className='btn_sec'>
-                    Add Equipment
-                </a>
-            </div>
             <div className='center'>
                 <div className='filter'>
                     <div className='categories'>
@@ -164,7 +160,7 @@ const Category = () => {
                         <ul>
                             <li
                                 key='all'
-                                className='row'
+                                className='cate_item'
                                 onClick={() =>
                                     window.location.replace(`/equipments`)
                                 }
@@ -176,7 +172,7 @@ const Category = () => {
                                     return (
                                         <li
                                             key={category}
-                                            className='main_row'
+                                            className='cate_item main_row'
                                             onClick={() =>
                                                 window.location.replace(
                                                     `/equipments/category/${category}`
@@ -235,31 +231,35 @@ const Category = () => {
                             <button onClick={getEquipments} className='btn_sec'>
                                 Refresh
                             </button>
+                        
+                            <div className='sort'>
+                                {/* <ul>
+                                    <li key='sortaz' className='column'> */}
+                                <input
+                                    type='radio'
+                                    name='sorting'
+                                    value='sortaz'
+                                    onChange={handleSortAZ}
+                                />
+                                <label className='sort_label'>Sort A - Z</label>
+                                {/* </li>
+                                    <li key='sortza' className='column'> */}
+                                <input
+                                    type='radio'
+                                    name='sorting'
+                                    value='sortza'
+                                    onChange={handleSortZA}
+                                />
+                                <label className='sort_label'>Sort Z - A</label>
+                                {/* </li>
+                                </ul> */}
+                            </div>
                         </div>
-                        <div className='sort'>
-                            {/* <ul>
-                                <li key='sortaz' className='column'> */}
-                            <input
-                                type='radio'
-                                name='sorting'
-                                value='sortaz'
-                                onChange={handleSortAZ}
-                            />
-                            <label className='sort_label'>Sort A - Z</label>
-                            {/* </li>
-                                <li key='sortza' className='column'> */}
-                            <input
-                                type='radio'
-                                name='sorting'
-                                value='sortza'
-                                onChange={handleSortZA}
-                            />
-                            <label className='sort_label'>Sort Z - A</label>
-                            {/* </li>
-                            </ul> */}
-                        </div>
+                        <a href='/equipments/add' className='btn_sec'>
+                            Add Equipment
+                        </a>
                     </div>
-                    <ul>
+                    <ul className="product_center">
                         {equipments.map((equipment) => {
                             return (
                                 <Equipment

@@ -1,4 +1,40 @@
-.item-image {
-    width: 200px;
-    height: 200px;
+.block {
+  text-align: center;
+  margin: 20px;
+}
+.equip_container {
+  width: 85vw;
+  max-width: 1170px;
+  margin: 0 auto;
+  text-align: right;
+}
+.equip_container img {
+  margin: 20px auto;
+  width: 100%;
+  height: auto;
+}
+.equip_info {
+  text-align: left;
+}
+.equip_data {
+  font-weight: bold;
+  color: var(--clr-black);
+}
+@media screen and (min-width: 992px) {
+  .equip_container {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .equip_info {
+    padding-top: 0;
+  }
+}
+.edit_btn {
+  float: left;
+}
+.del_btn {
+  margin-left: 60px;
+  float: left;
 }

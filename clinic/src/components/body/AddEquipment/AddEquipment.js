@@ -78,101 +78,112 @@ const AddEquipment = () => {
 
     return (
         <div>
-            <div>
-                <button>
-                    <Link to={'/equipments'}>Back to Equipments</Link>
-                </button>
+            <div className="block">
+                <Link to={'/equipments'} className="btn_black">Back to Equipments</Link>
             </div>
-            <div className='add-img'>
-                <img
-                    src={img}
-                    alt='not available'
-                    onChange={changeImg}
-                    width='20%'
-                    height='20%'
-                />
+            <div className="center add-container">
+                <div className='add-img'>
+                    <img
+                        src={img}
+                        alt='not available'
+                        onChange={changeImg}
+                        width='100%'
+                        height='100%'
+                    />
+                </div>
+                <form className="add-form">
+                    <div>
+                        <label>Image: </label>
+                        <input className='input-text' type='text' value={img || ''} onChange={changeImg} />
+                    </div>
+                    <div>
+                        <label>Name: </label>
+                        <input
+                            type='text'
+                            value={name || ''}
+                            onChange={changeName}
+                            className='input-text'
+                        />
+                    </div>
+                    <div>
+                        <label>Quantity: </label>
+                        <input
+                            type='text'
+                            value={quantity || ''}
+                            onChange={changeQuantity}
+                            className='input-text'
+                        />
+                    </div>
+                    <div>
+                        <label>Category: </label>
+                        <input
+                            type='text'
+                            value={category || ''}
+                            onChange={changeCategory}
+                            className='input-text'
+                        />
+                    </div>
+                    <div>
+                        <label>Description: </label>
+                        <textarea
+                            size='150'
+                            value={description || ''}
+                            onChange={changeDescription}
+                            className='input-description'
+                        />
+                    </div>
+                    <div>
+                        <label>Country: </label>
+                        <input
+                            type='text'
+                            value={country || ''}
+                            onChange={changeCountry}
+                            className='input-text'
+                        />
+                    </div>
+                    <div>
+                        <label>Model: </label>
+                        <input
+                            type='text'
+                            value={model || ''}
+                            onChange={changeModel}
+                            className='input-text'
+                        />
+                    </div>
+                    <div>
+                        <label>SubCategory: </label>
+                        <input
+                            type='text'
+                            value={subcategory || ''}
+                            onChange={changeSubCategory}
+                            className='input-text'
+                        />
+                    </div>
+                    <div>
+                        <label>Condition: </label>
+                        <input
+                            type='text'
+                            value={condition || ''}
+                            onChange={changeCondition}
+                            className='input-text'
+                        />
+                    </div>
+                    <div>
+                        <label>Brand: </label>
+                        <input
+                            type='text'
+                            value={brand || ''}
+                            onChange={changeBrand}
+                            className='input-text'
+                        />
+                    </div>
+                </form>
             </div>
-            <form>
-                <div>
-                    <label>Image: </label>
-                    <input type='text' value={img || ''} onChange={changeImg} />
-                </div>
-                <div>
-                    <label>Name: </label>
-                    <input
-                        type='text'
-                        value={name || ''}
-                        onChange={changeName}
-                    />
-                </div>
-                <div>
-                    <label>Quantity: </label>
-                    <input
-                        type='text'
-                        value={quantity || ''}
-                        onChange={changeQuantity}
-                    />
-                </div>
-                <div>
-                    <label>Category: </label>
-                    <input
-                        type='text'
-                        value={category || ''}
-                        onChange={changeCategory}
-                    />
-                </div>
-                <div>
-                    <label>Description: </label>
-                    <input
-                        type='text'
-                        value={description || ''}
-                        onChange={changeDescription}
-                    />
-                </div>
-                <div>
-                    <label>Country: </label>
-                    <input
-                        type='text'
-                        value={country || ''}
-                        onChange={changeCountry}
-                    />
-                </div>
-                <div>
-                    <label>Model: </label>
-                    <input
-                        type='text'
-                        value={model || ''}
-                        onChange={changeModel}
-                    />
-                </div>
-                <div>
-                    <label>SubCategory: </label>
-                    <input
-                        type='text'
-                        value={subcategory || ''}
-                        onChange={changeSubCategory}
-                    />
-                </div>
-                <div>
-                    <label>Condition: </label>
-                    <input
-                        type='text'
-                        value={condition || ''}
-                        onChange={changeCondition}
-                    />
-                </div>
-                <div>
-                    <label>Brand: </label>
-                    <input
-                        type='text'
-                        value={brand || ''}
-                        onChange={changeBrand}
-                    />
-                </div>
-            </form>
-            <button type='submit' onClick={handleSubmit} className='btn'>
-                <a href='/equipments'>Submit</a>
-            </button>
+            <div className='block'>
+                <a href='/equipments' onClick={handleSubmit} className='btn_prim'>
+                    Submit
+                </a>
+            </div>
         </div>
     )
 }
