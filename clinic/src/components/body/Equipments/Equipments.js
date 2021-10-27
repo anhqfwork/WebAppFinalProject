@@ -8,17 +8,18 @@ const Equipments = () => {
     const [categories, setCategories] = useState([])
     const [equipments, setEquipments] = useState([])
     const [countries, setCountries] = useState([])
+    const [conditions, setConditions] = useState([])
+    const [brands, setBrands] = useState([])
 
-    const getEquipments = async () => {
-        const res = await axios
-            .get('api/v1/equipment')
-            .catch((err) => console.log(err))
+    const [filterVariables, setFilterVariables] = useState({
+        country: 'all',
+        condition: 'all',
+        brand: 'all',
+    })
 
-        if (res && res.data) {
-            setEquipments(res.data.equipments)
-        }
-    }
-
+    const [sortVariable, setSortVariable] = useState('normal')
+    
+    // get categories
     const getCategories = async () => {
         const res = await axios
             .get('api/v1/equipment')
@@ -36,44 +37,88 @@ const Equipments = () => {
         }
     }
 
-    const getCountries = async () => {
+    // get Equipments with Filter
+    const getEquipments = async () => {
         const res = await axios
             .get('api/v1/equipment')
             .catch((err) => console.log(err))
 
         if (res && res.data) {
-            const results = [
+            // setEquipments(res.data.equipments)
+            const newEquipments = res.data.equipments.filter((equipment) => {
+                for (let key in filterVariables) {
+                    if (
+                        filterVariables[key] != 'all' &&
+                        filterVariables[key] != equipment[key]
+                    )
+                        return false
+                }
+                return true
+            })
+            
+
+            if (sortVariable === 'sortAZ') {
+                const sortedEquipments = newEquipments.sort((a, b) => {
+                    if (a.name > b.name) {
+                        return -1
+                    } else if (a.name < b.name) {
+                        return 1
+                    }
+                    return 0
+                })
+                setEquipments(sortedEquipments)
+            } else if (sortVariable === 'sortZA') {
+                const sortedEquipments = newEquipments.sort((a, b) => {
+                    if (a.name > b.name) {
+                        return 1
+                    } else if (a.name < b.name) {
+                        return -1
+                    }
+                    return 0
+                })
+                setEquipments(sortedEquipments)
+            } else {
+                setEquipments(newEquipments)
+            }
+
+            console.log(newEquipments)
+
+            const newCountries = [
                 ...new Set(
-                    res.data.equipments.map((equipment) => {
+                    newEquipments.map((equipment) => {
                         return equipment.country
                     })
                 ),
             ]
-            console.log(results)
-            setCountries(results)
+            setCountries(newCountries)
+
+            const newConditions = [
+                ...new Set(
+                    newEquipments.map((equipment) => {
+                        return equipment.condition
+                    })
+                ),
+            ]
+            setConditions(newConditions)
+
+            const newBrands = [
+                ...new Set(
+                    newEquipments.map((equipment) => {
+                        return equipment.brand
+                    })
+                ),
+            ]
+            setBrands(newBrands)
         }
     }
 
+    // init variables
     useEffect(() => {
         getEquipments()
         getCategories()
-        getCountries()
     }, [])
 
-    const Equipment = (equipment) => {
-        return (
-            <li className="product_item">
-                <a href={`/equipments/${equipment._id}`}>
-                    <img className='item-image' src={equipment.img} alt='' />
-                </a>
-                <div className="product_info">
-                    <h5>{equipment.name}</h5>
-                    <p>Country: <span>{equipment.country}</span></p>
-                </div>
-            </li>
-        )
-    }
-
+    // set Equipments (Search Bar)
     const filterContent = (equipments, searchTerm) => {
         const result = equipments.filter((equipment) => {
             return equipment.name.includes(searchTerm)
@@ -81,6 +126,7 @@ const Equipments = () => {
         setEquipments(result)
     }
 
+    // get Search Input (Search Bar)
     const handleTextSearch = async (e) => {
         const searchTerm = e.currentTarget.value
         console.log(e.currentTarget.value)
@@ -93,71 +139,42 @@ const Equipments = () => {
         }
     }
 
-    const filterContentCountry = (equipments, searchTerm) => {
-        const result = equipments.filter((equipment) => {
-            return equipment.country.includes(searchTerm)
-        })
-        setEquipments(result)
+    const handleChangeFilter = (e, key) => {
+        const newValue = e.target.value
+        const newFilterVariales = filterVariables
+        newFilterVariales[key] = newValue
+        console.log(newFilterVariales)
+        setFilterVariables(newFilterVariales)
+        setSortVariable('normal')
+        getEquipments()
     }
 
-    const handleCountrySearch = async (country) => {
-        const searchTerm = country
-        const res = await axios
-            .get('api/v1/equipment')
-            .catch((err) => console.log(err))
-
-        if (res && res.data) {
-            filterContentCountry(res.data.equipments, searchTerm)
-        }
+    const handleChangeSort = (e) => {
+        const newSort = e.target.value 
+        console.log(newSort)
+        setSortVariable(newSort)
+        getEquipments()
     }
 
-    const handleChange = (e) => {
-        const country = e.target.value
-        handleCountrySearch(country)
-    }
-
-    const handleSortAZ = async () => {
-        const res = await axios
-            .get('api/v1/equipment')
-            .catch((err) => console.log(err))
-
-        if (res && res.data) {
-            const newEquipments = res.data.equipments.sort((a, b) => {
-                if (a.name > b.name) {
-                    return 1
-                } else if (a.name < b.name) {
-                    return -1
-                }
-                return 0
-            })
-            setEquipments(newEquipments)
-        }
-    }
-
-    const handleSortZA = async () => {
-        const res = await axios
-            .get('api/v1/equipment')
-            .catch((err) => console.log(err))
-
-        if (res && res.data) {
-            const newEquipments = res.data.equipments.sort((a, b) => {
-                if (a.name > b.name) {
-                    return -1
-                } else if (a.name < b.name) {
-                    return 1
-                }
-                return 0
-            })
-            setEquipments(newEquipments)
-        }
+    // Equipment Box
+    const Equipment = (equipment) => {
+        return (
+            <li className='product_item'>
+                <a href={`/equipments/${equipment._id}`}>
+                    <img className='item-image' src={equipment.img} alt='' />
+                </a>
+                <div className='product_info'>
+                    <h5>{equipment.name}</h5>
+                    <p>
+                        Country: <span>{equipment.country}</span>
+                    </p>
+                </div>
+            </li>
+        )
     }
 
     return (
         <div>
-            {/* <div className='page_title'>
-                <h4>Equipments</h4>
-                
-            </div> */}
             <div className='center'>
                 <div className='filter'>
                     <div className='categories'>
@@ -189,19 +206,104 @@ const Equipments = () => {
                             })}
                         </ul>
                     </div>
-                    <div className='countries'>
+                    <div className='radio-filter'>
                         <div className='sidebar_header'>Countries</div>
                         <ul>
+                            <li key='all' className='row'>
+                                <input
+                                    type='radio'
+                                    name='country'
+                                    value='all'
+                                    checked={
+                                        filterVariables['country'] === 'all'
+                                    }
+                                    onChange={(e) =>
+                                        handleChangeFilter(e, 'country')
+                                    }
+                                />
+                                All
+                            </li>
                             {countries.map((country) => {
                                 return (
                                     <li key={country} className='row'>
                                         <input
                                             type='radio'
-                                            name='type'
+                                            name='country'
                                             value={country}
-                                            onChange={handleChange}
+                                            onChange={(e) =>
+                                                handleChangeFilter(e, 'country')
+                                            }
                                         />
                                         {country}
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                    <div className='radio-filter'>
+                        <div className='sidebar_header'>Conditions</div>
+                        <ul>
+                            <li key='all' className='row'>
+                                <input
+                                    type='radio'
+                                    name='condition'
+                                    value='all'
+                                    checked={
+                                        filterVariables['condition'] === 'all'
+                                    }
+                                    onChange={(e) =>
+                                        handleChangeFilter(e, 'condition')
+                                    }
+                                />
+                                All
+                            </li>
+                            {conditions.map((condition) => {
+                                return (
+                                    <li key={condition} className='row'>
+                                        <input
+                                            type='radio'
+                                            name='condition'
+                                            value={condition}
+                                            onChange={(e) =>
+                                                handleChangeFilter(
+                                                    e,
+                                                    'condition'
+                                                )
+                                            }
+                                        />
+                                        {condition}
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                    <div className='radio-filter'>
+                        <div className='sidebar_header'>Brands</div>
+                        <ul>
+                            <li key='all' className='row'>
+                                <input
+                                    type='radio'
+                                    name='brand'
+                                    value='all'
+                                    checked={filterVariables['brand'] === 'all'}
+                                    onChange={(e) =>
+                                        handleChangeFilter(e, 'brand')
+                                    }
+                                />
+                                All
+                            </li>
+                            {brands.map((brand) => {
+                                return (
+                                    <li key={brand} className='row'>
+                                        <input
+                                            type='radio'
+                                            name='brand'
+                                            value={brand}
+                                            onChange={(e) =>
+                                                handleChangeFilter(e, 'brand')
+                                            }
+                                        />
+                                        {brand}
                                     </li>
                                 )
                             })}
@@ -221,35 +323,39 @@ const Equipments = () => {
                             <button onClick={getEquipments} className='btn_sec'>
                                 Refresh
                             </button>
-                        
+
                             <div className='sort'>
-                                {/* <ul>
-                                    <li key='sortaz' className='column'> */}
                                 <input
                                     type='radio'
                                     name='sorting'
-                                    value='sortaz'
-                                    onChange={handleSortAZ}
+                                    value='normal'
+                                    checked={sortVariable === 'normal'}
+                                    onChange={handleChangeSort}
+                                />
+                                <label className='sort_label'>Normal</label>
+                                <input
+                                    type='radio'
+                                    name='sorting'
+                                    value='sortAZ'
+                                    checked={sortVariable === 'sortAZ'}
+                                    onChange={handleChangeSort}
                                 />
                                 <label className='sort_label'>Sort A - Z</label>
-                                {/* </li>
-                                    <li key='sortza' className='column'> */}
                                 <input
                                     type='radio'
                                     name='sorting'
-                                    value='sortza'
-                                    onChange={handleSortZA}
+                                    value='sortZA'
+                                    checked={sortVariable === 'sortZA'}
+                                    onChange={handleChangeSort}
                                 />
                                 <label className='sort_label'>Sort Z - A</label>
-                                {/* </li>
-                                </ul> */}
                             </div>
                         </div>
                         <a href='/equipments/add' className='btn_sec'>
                             Add Equipment
                         </a>
                     </div>
-                    <ul className="product_center">
+                    <ul className='product_center'>
                         {equipments.map((equipment) => {
                             return (
                                 <Equipment

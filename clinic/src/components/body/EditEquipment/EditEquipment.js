@@ -30,6 +30,9 @@ const EditEquipment = () => {
             setCategory(res.data.equipment.category)
             setDescription(res.data.equipment.description)
             setCountry(res.data.equipment.country)
+            setCondition(res.data.equipment.condition)
+            setBrand(res.data.equipment.brand)
+            setSubcategory(res.data.equipment.subcategory)
         }
     }
 
@@ -100,10 +103,12 @@ const EditEquipment = () => {
 
     return (
         <div>
-            <div className="block">
-                <Link to={`/equipments/${id}`} className="btn_black">Go Back</Link>
+            <div className='block'>
+                <Link to={`/equipments/${id}`} className='btn_black'>
+                    Go Back
+                </Link>
             </div>
-            <div className="center add-container">
+            <div className='center add-container'>
                 <div className='add-img'>
                     <img
                         src={img}
@@ -113,10 +118,15 @@ const EditEquipment = () => {
                         height='100%'
                     />
                 </div>
-                <form className="add-form">
+                <form className='add-form'>
                     <div>
                         <label>Image: </label>
-                        <input className='input-text' type='text' value={img || ''} onChange={changeImg} />
+                        <input
+                            className='input-text'
+                            type='text'
+                            value={img || ''}
+                            onChange={changeImg}
+                        />
                     </div>
                     <div>
                         <label>Name: </label>
@@ -202,11 +212,14 @@ const EditEquipment = () => {
                 </form>
             </div>
             <div className='block'>
-                <a href={`/equipments/${id}`} onClick={handleSubmit} className='btn_prim'>
+                <a
+                    href={`/equipments/${id}`}
+                    onClick={handleSubmit}
+                    className='btn_prim'
+                >
                     Submit
                 </a>
             </div>
-            
         </div>
     )
 }

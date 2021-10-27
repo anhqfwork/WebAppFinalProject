@@ -4,6 +4,7 @@ const router = express.Router()
 const {
     getAllEquipments,
     createEquipment,
+    createEquipments,
     getEquipment,
     updateEquipment,
     deleteEquipment,
@@ -11,6 +12,7 @@ const {
 
 router.route('/').get(getAllEquipments).post(createEquipment)
 
+router.route('/createEquipments').post(createEquipments)
 router
     .route('/:id')
     .get(getEquipment)

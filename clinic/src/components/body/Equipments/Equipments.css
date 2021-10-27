@@ -5,7 +5,7 @@
 }
 .filter {
   /* border: 3px solid var(--clr-grey); */
-  font-size: 18px;
+  font-size: 16px;
   padding: 1rem 3rem;
 }
 .equipments {
@@ -40,7 +40,7 @@
   border: 1px solid var(--clr-pri-darkest);
 }
 .categories,
-.countries {
+.radio-filter {
   border-radius: var(--radius);
   box-shadow: var(--dark-shadow);
   padding: 20px 30px;
@@ -62,6 +62,7 @@
     justify-content: center;
     padding: 1rem;
   }
+
   .equipments {
     padding-right: 30px;
     justify-content: space-between;

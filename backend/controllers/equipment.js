@@ -18,6 +18,18 @@ const createEquipment = async (req, res) => {
     }
 }
 
+const createEquipments = async (req, res) => {
+    try {
+        const equipments = req.body
+        equipments.map(async (equipment) => {
+            await Equipment.create(equipment)
+        })
+        res.status(201).json({ equipments })
+    } catch {
+        res.status(500).json({ msg: err })
+    }
+}
+
 const getEquipment = async (req, res) => {
     try {
         const {id: equipmentId} = req.params 
@@ -68,6 +80,7 @@ const deleteEquipment = async (req, res) => {
 module.exports = {
     getAllEquipments,
     createEquipment,
+    createEquipments,
     getEquipment,
     updateEquipment,
     deleteEquipment
