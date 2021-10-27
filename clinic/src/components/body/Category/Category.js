@@ -237,7 +237,7 @@ const Category = () => {
                                         handleChangeFilter(e, 'country')
                                     }
                                 />
-                                All
+                                &nbsp;&nbsp;All
                             </li>
                             {countries.map((country) => {
                                 return (
@@ -246,11 +246,15 @@ const Category = () => {
                                             type='radio'
                                             name='country'
                                             value={country}
+                                            checked={
+                                                filterVariables['country'] ===
+                                                country
+                                            }
                                             onChange={(e) =>
                                                 handleChangeFilter(e, 'country')
                                             }
                                         />
-                                        {country}
+                                        &nbsp;&nbsp;{country}
                                     </li>
                                 )
                             })}
@@ -271,7 +275,7 @@ const Category = () => {
                                         handleChangeFilter(e, 'condition')
                                     }
                                 />
-                                All
+                                &nbsp;&nbsp;All
                             </li>
                             {conditions.map((condition) => {
                                 return (
@@ -280,6 +284,10 @@ const Category = () => {
                                             type='radio'
                                             name='condition'
                                             value={condition}
+                                            checked={
+                                                filterVariables['condition'] ===
+                                                condition
+                                            }
                                             onChange={(e) =>
                                                 handleChangeFilter(
                                                     e,
@@ -287,7 +295,7 @@ const Category = () => {
                                                 )
                                             }
                                         />
-                                        {condition}
+                                        &nbsp;&nbsp;{condition}
                                     </li>
                                 )
                             })}
@@ -306,7 +314,7 @@ const Category = () => {
                                         handleChangeFilter(e, 'brand')
                                     }
                                 />
-                                All
+                                &nbsp;&nbsp;All
                             </li>
                             {brands.map((brand) => {
                                 return (
@@ -315,11 +323,15 @@ const Category = () => {
                                             type='radio'
                                             name='brand'
                                             value={brand}
+                                            checked={
+                                                filterVariables['brand'] ===
+                                                brand
+                                            }
                                             onChange={(e) =>
                                                 handleChangeFilter(e, 'brand')
                                             }
                                         />
-                                        {brand}
+                                        &nbsp;&nbsp;{brand}
                                     </li>
                                 )
                             })}
