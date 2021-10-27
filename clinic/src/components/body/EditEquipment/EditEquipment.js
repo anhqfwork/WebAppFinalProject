@@ -154,16 +154,7 @@ const EditEquipment = () => {
                             onChange={changeCategory}
                             className='input-text'
                         />
-                    </div>
-                    <div>
-                        <label>Description: </label>
-                        <textarea
-                            size='150'
-                            value={description || ''}
-                            onChange={changeDescription}
-                            className='input-description'
-                        />
-                    </div>
+                    </div>                    
                     <div>
                         <label>Country: </label>
                         <input
@@ -207,6 +198,15 @@ const EditEquipment = () => {
                             value={brand || ''}
                             onChange={changeBrand}
                             className='input-text'
+                        />
+                    </div>
+                    <div>
+                        <label>Description: </label>
+                        <textarea
+                            size='150'
+                            value={description || ''}
+                            onChange={changeDescription}
+                            className='input-description'
                         />
                     </div>
                 </form>

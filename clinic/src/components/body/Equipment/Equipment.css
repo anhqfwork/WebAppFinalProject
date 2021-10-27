@@ -9,6 +9,8 @@
   text-align: right;
 }
 .equip_container img {
+  box-shadow: var(--dark-shadow);
+  border-radius: var(--radius);
   margin: 20px auto;
   width: 100%;
   height: auto;
@@ -40,7 +42,10 @@
 }
 .description {
   padding: 20px;
+  margin-bottom: 60px;
   position: relative;
   width: fit-content;
   align-items: left;
+  border-radius: var(--radius);
+  box-shadow: var(--light-shadow);
 }
