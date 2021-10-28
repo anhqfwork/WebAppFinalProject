@@ -18,7 +18,8 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
                     if (authLoading) {
                         return null
                     }
-                    else if (isAuthenticated) {
+                    
+                    if (isAuthenticated) {
                         return (
                             <>
                                 <Header />
