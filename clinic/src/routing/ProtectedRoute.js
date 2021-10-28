@@ -1,5 +1,5 @@
 import { Route, Redirect } from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
 import Header from '../components/header/Header'
 import Footer from '../components/footer/Footer'
@@ -7,14 +7,18 @@ import Home from '../components/body/Home/Home'
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
     const {
-        authState: { isAuthenticated },
+        authState: { isAuthenticated, authLoading },
     } = useContext(AuthContext)
+
     return (
         <Route
             {...rest}
             render={
                 (props) => {
-                    if (isAuthenticated) {
+                    if (authLoading) {
+                        return null
+                    }
+                    else if (isAuthenticated) {
                         return (
                             <>
                                 <Header />
@@ -22,6 +26,8 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
                                 <Footer />
                             </>
                         )
+                    } else {
+                        return (<Redirect to='/login' />)
                     }
                 }
             }

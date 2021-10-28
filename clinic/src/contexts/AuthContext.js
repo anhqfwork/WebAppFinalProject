@@ -22,7 +22,7 @@ const AuthContextProvider = ({ children }) => {
     try {
       const response = await axios.get(`${apiUrl}/auth`)
       if (response.data.success) {
-        dispatch({ type: 'SET_AUTH', payload: { isAuthenticated: true, user: response.data.user } })
+        dispatch({ type: 'SET_AUTH', payload: { isAuthenticated: true, user: response.data.user, authLoading: false } })
       }
     } catch (error) {
       localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME)

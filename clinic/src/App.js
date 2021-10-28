@@ -53,7 +53,7 @@ function App() {
                         path='/equipments/:id/edit'
                         component={EditEquipment}
                     />
-                    <ProtectedRoute path='*' components={Error} />
+                    <ProtectedRoute path='*' component={Error} />
                 </Switch>
             </Router>
         </AuthContextProvider>
