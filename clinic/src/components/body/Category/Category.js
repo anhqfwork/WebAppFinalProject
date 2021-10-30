@@ -59,9 +59,9 @@ const Category = () => {
             if (sortVariable === 'sortAZ') {
                 const sortedEquipments = newEquipments.sort((a, b) => {
                     if (a.name > b.name) {
-                        return -1
-                    } else if (a.name < b.name) {
                         return 1
+                    } else if (a.name < b.name) {
+                        return -1
                     }
                     return 0
                 })
@@ -69,9 +69,9 @@ const Category = () => {
             } else if (sortVariable === 'sortZA') {
                 const sortedEquipments = newEquipments.sort((a, b) => {
                     if (a.name > b.name) {
-                        return 1
-                    } else if (a.name < b.name) {
                         return -1
+                    } else if (a.name < b.name) {
+                        return 1
                     }
                     return 0
                 })
@@ -90,7 +90,16 @@ const Category = () => {
                 ),
             ]
             console.log(newCountries)
-            setCountries(newCountries)
+            setCountries(
+                newCountries.sort((a, b) => {
+                    if (a > b) {
+                        return 1
+                    } else if (a < b) {
+                        return -1
+                    }
+                    return 0
+                })
+            )
 
             const newConditions = [
                 ...new Set(
@@ -99,7 +108,16 @@ const Category = () => {
                     })
                 ),
             ]
-            setConditions(newConditions)
+            setConditions(
+                newConditions.sort((a, b) => {
+                    if (a > b) {
+                        return 1
+                    } else if (a < b) {
+                        return -1
+                    }
+                    return 0
+                })
+            )
 
             const newBrands = [
                 ...new Set(
@@ -108,7 +126,16 @@ const Category = () => {
                     })
                 ),
             ]
-            setBrands(newBrands)
+            setBrands(
+                newBrands.sort((a, b) => {
+                    if (a > b) {
+                        return 1
+                    } else if (a < b) {
+                        return -1
+                    }
+                    return 0
+                })
+            )
         }
     }
 
@@ -116,7 +143,7 @@ const Category = () => {
     useEffect(() => {
         getEquipments()
         getCategories()
-    }, [])
+    }, [sortVariable, filterVariables])
 
     const filterContent = (equipments, searchTerm) => {
         const result = equipments.filter((equipment) => {
@@ -152,9 +179,8 @@ const Category = () => {
 
     const handleChangeSort = (e) => {
         const newSort = e.target.value
-        console.log(newSort)
+        // console.log(newSort)
         setSortVariable(newSort)
-        getEquipments()
     }
 
     // Equipment Box
@@ -172,6 +198,17 @@ const Category = () => {
                 </div>
             </li>
         )
+    }
+
+    const refreshPage = () => {
+        setFilterVariables({
+            category: category_self,
+            country: 'all',
+            condition: 'all',
+            brand: 'all',
+        })
+        setSortVariable('normal')
+        // getEquipments()
     }
 
     return (
@@ -348,7 +385,7 @@ const Category = () => {
                                 name='searchTerm'
                                 onChange={handleTextSearch}
                             ></input>
-                            <button onClick={getEquipments} className='btn_sec'>
+                            <button onClick={refreshPage} className='btn_sec'>
                                 Refresh
                             </button>
 

@@ -18,7 +18,7 @@ const Equipments = () => {
     })
 
     const [sortVariable, setSortVariable] = useState('normal')
-    
+
     // get categories
     const getCategories = async () => {
         const res = await axios
@@ -55,19 +55,8 @@ const Equipments = () => {
                 }
                 return true
             })
-            
 
-            if (sortVariable === 'sortAZ') {
-                const sortedEquipments = newEquipments.sort((a, b) => {
-                    if (a.name > b.name) {
-                        return -1
-                    } else if (a.name < b.name) {
-                        return 1
-                    }
-                    return 0
-                })
-                setEquipments(sortedEquipments)
-            } else if (sortVariable === 'sortZA') {
+            if (sortVariable == 'sortAZ') {
                 const sortedEquipments = newEquipments.sort((a, b) => {
                     if (a.name > b.name) {
                         return 1
@@ -77,11 +66,22 @@ const Equipments = () => {
                     return 0
                 })
                 setEquipments(sortedEquipments)
+                console.log(equipments)
+            } else if (sortVariable == 'sortZA') {
+                const sortedEquipments = newEquipments.sort((a, b) => {
+                    if (a.name > b.name) {
+                        return -1
+                    } else if (a.name < b.name) {
+                        return 1
+                    }
+                    return 0
+                })
+                setEquipments(sortedEquipments)
+                console.log(equipments)
             } else {
                 setEquipments(newEquipments)
+                console.log(equipments)
             }
-
-            console.log(newEquipments)
 
             const newCountries = [
                 ...new Set(
@@ -90,7 +90,17 @@ const Equipments = () => {
                     })
                 ),
             ]
-            setCountries(newCountries)
+
+            setCountries(
+                newCountries.sort((a, b) => {
+                    if (a > b) {
+                        return 1
+                    } else if (a < b) {
+                        return -1
+                    }
+                    return 0
+                })
+            )
 
             const newConditions = [
                 ...new Set(
@@ -99,7 +109,16 @@ const Equipments = () => {
                     })
                 ),
             ]
-            setConditions(newConditions)
+            setConditions(
+                newConditions.sort((a, b) => {
+                    if (a > b) {
+                        return 1
+                    } else if (a < b) {
+                        return -1
+                    }
+                    return 0
+                })
+            )
 
             const newBrands = [
                 ...new Set(
@@ -108,7 +127,16 @@ const Equipments = () => {
                     })
                 ),
             ]
-            setBrands(newBrands)
+            setBrands(
+                newBrands.sort((a, b) => {
+                    if (a > b) {
+                        return 1
+                    } else if (a < b) {
+                        return -1
+                    }
+                    return 0
+                })
+            )
         }
     }
 
@@ -116,7 +144,7 @@ const Equipments = () => {
     useEffect(() => {
         getEquipments()
         getCategories()
-    }, [])
+    }, [sortVariable, filterVariables])
 
     // set Equipments (Search Bar)
     const filterContent = (equipments, searchTerm) => {
@@ -145,15 +173,23 @@ const Equipments = () => {
         newFilterVariales[key] = newValue
         console.log(newFilterVariales)
         setFilterVariables(newFilterVariales)
-        setSortVariable('normal')
+        // setSortVariable('normal')
         getEquipments()
     }
 
     const handleChangeSort = (e) => {
-        const newSort = e.target.value 
-        console.log(newSort)
+        const newSort = e.target.value
         setSortVariable(newSort)
-        getEquipments()
+    }
+
+    const refreshPage = () => {
+        setFilterVariables({
+            country: 'all',
+            condition: 'all',
+            brand: 'all',
+        })
+        setSortVariable('normal')
+        // getEquipments()
     }
 
     // Equipment Box
@@ -332,7 +368,7 @@ const Equipments = () => {
                                 name='searchTerm'
                                 onChange={handleTextSearch}
                             ></input>
-                            <button onClick={getEquipments} className='btn_sec'>
+                            <button onClick={refreshPage} className='btn_sec'>
                                 Refresh
                             </button>
 
